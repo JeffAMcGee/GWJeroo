@@ -4,8 +4,8 @@ GWJeroo is a library that lets students run
 GWJeroo is intended for students in Pre-AP and AP classes who are transitioning
 from Jeroo to Java.
 
-I developed this when I was a high school computer science teacher. I no longer
-teach, so I don't expect to update it.
+I developed this in 2007 when I was a high school computer science teacher. I
+no longer teach, so I don't expect to update it.
 
 ## Features
 
@@ -48,6 +48,60 @@ I have included three sample programs to help you get started:
 	to someone that meets their standards.  As the Jeroos wander, they lower
 	their standards.  Students generate some interesting bugs while solving
 	this problem.
+
+# Sample Code
+
+To give you a better idea of how GWJeroo compares with Jeroo, here is some sample code:
+
+<table>
+<tbody><tr><th></th><th>Code in Jeroo</th><th>Code in GWJeroo</th></tr>
+<tr><th>The Main Method</th><td><pre>method main() {
+    Jeroo kim = new Jeroo();
+    
+    kim.turn(RIGHT);
+    kim.turnAndGo();
+}
+</pre></td><td><pre>public static void main(String[] args) {
+    JerooWorld world = new JerooWorld();
+    ExtendedJeroo kim = new ExtendedJeroo();
+    world.add(new Location(0,0),kim);
+    world.show();
+    
+    kim.turn(RIGHT);
+    kim.turnAndGo();
+}
+</pre></td></tr><tr><th>A Jeroo Method</th><td><pre>method turnAndGo() {
+    hop();
+    plant();
+    turn(RIGHT);
+}
+</pre></td><td><pre>public void turnAndGo() {
+    hop();
+    plant();
+    turn(RIGHT);
+}
+</pre></td></tr><tr><th>Calling a constructor</th><td><pre>method main() {
+    Jeroo kim = new Jeroo(3,4,EAST,100);
+    kim.hop();
+}
+</pre></td><td><pre>import info.gridworld.grid.Location;
+
+public class ExtendedJeroo extends Jeroo {
+    public ExtendedJeroo() {
+        super(EAST,100);
+    }
+    public static void main(String[] args) {
+        JerooWorld world = new JerooWorld();
+        ExtendedJeroo kim = new ExtendedJeroo();
+        world.add(new Location(3,4),kim);
+        world.show();
+        kim.hop();
+    }
+}
+</pre></td></tr>
+</tbody></table>
+
+After world.show(), code can be copied directly from existing main methods into GWJeroo methods. You can copy and paste Jeroo methods to GWJeroo by changing the word method to "public void". The one place where GWJeroo is significantly different from Jeroo is when you need to create a Jeroo using a constructor other than the default constructor.
 
 # Misc.
 Here's some assignments and resources other people created for GWJeroo:
