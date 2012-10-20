@@ -1,0 +1,9 @@
+GWJeroo:
+Jeffrey McGee <JeffAMcGee@gmail.com>
+
+GridWorld:
+Cay Horstmann (http://horstmann.com)
+
+Images and Design of the origianal Jeroo:
+Brian Dorn <dorn@cc.gatech.edu>
+Dean Sanders

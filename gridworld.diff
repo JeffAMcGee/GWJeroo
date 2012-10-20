@@ -1,0 +1,48 @@
+diff -ru GridWorldCode/framework/info/gridworld/grid/BoundedGrid.java gwjeroo/src/info/gridworld/grid/BoundedGrid.java
+--- GridWorldCode/framework/info/gridworld/grid/BoundedGrid.java	2007-06-20 16:40:56.000000000 -0500
++++ gwjeroo/src/info/gridworld/grid/BoundedGrid.java	2008-06-17 18:44:54.000000000 -0500
+@@ -82,6 +82,7 @@
+         return theLocations;
+     }
+ 
++    @SuppressWarnings("unchecked")
+     public E get(Location loc)
+     {
+         if (!isValid(loc))
+diff -ru GridWorldCode/framework/info/gridworld/gui/GridPanel.java gwjeroo/src/info/gridworld/gui/GridPanel.java
+--- GridWorldCode/framework/info/gridworld/gui/GridPanel.java	2007-06-20 16:40:56.000000000 -0500
++++ gwjeroo/src/info/gridworld/gui/GridPanel.java	2008-07-09 21:21:21.000000000 -0500
+@@ -127,7 +127,11 @@
+     private void drawOccupant(Graphics2D g2, int xleft, int ytop, Object obj)
+     {
+         Rectangle cellToDraw = new Rectangle(xleft, ytop, cellSize, cellSize);
+-
++        
++        //this prevents a multithreading problem.
++        if(obj==null)
++        	return;
++        
+         // Only draw if the object is visible within the current clipping
+         // region.
+         if (cellToDraw.intersects(g2.getClip().getBounds()))
+@@ -227,7 +231,7 @@
+     private void drawWatermark(Graphics2D g2)
+     {
+         String versionId = resources.getString("version.id");
+-        if ("1.00".compareTo(versionId) == 0) return; // TODO: Better mechanism
++        if ("1.01".compareTo(versionId) == 0) return; // TODO: Better mechanism
+ 
+         try
+         {
+diff -ru GridWorldCode/framework/info/gridworld/gui/GUIController.java gwjeroo/src/info/gridworld/gui/GUIController.java
+--- GridWorldCode/framework/info/gridworld/gui/GUIController.java	2007-06-20 16:40:56.000000000 -0500
++++ gwjeroo/src/info/gridworld/gui/GUIController.java	2008-02-07 21:35:52.000000000 -0600
+@@ -143,6 +143,8 @@
+ 
+     private void addOccupant(T occupant)
+     {
++    	if(occupant == null)
++    		return;
+         Class cl = occupant.getClass();
+         do
+         {
